@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<section class="section narrow"><h1 data-ar="الإشعارات" data-en="Notifications">الإشعارات</h1>{% for n in rows %}<article class="card"><p>{{n.body}}</p><small class="muted">{{n.created_at}}</small></article>{% else %}<p data-ar="لا توجد إشعارات." data-en="No notifications.">لا توجد إشعارات.</p>{% endfor %}</section>{% endblock %}
