@@ -126,7 +126,7 @@ def register():
  if request.method=='POST':
   email=request.form.get('email','').strip().lower();pwd=request.form.get('password','')
   if not request.form.get('agree'):flash('You must accept the terms and privacy policy.');return redirect(url_for('register'))
-  if not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+',email) or len(email)>254 or len(pwd)<10:flash('Enter a valid email and password of at least 10 characters.');return redirect(url_for('register'))
+    if not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+',email) or len(email)>254 or not re.fullmatch(r'[A-Za-z]{3}[0-9]{6}',pwd):flash('Enter a valid email and a password of 3 letters followed by 6 digits.');return redirect(url_for('register'))
   try:
    uid=execute('INSERT INTO users(email,password,admin) VALUES(?,?,?)',(email,generate_password_hash(pwd),0))
   except sqlite3.IntegrityError:flash('Email already registered.');return redirect(url_for('register'))
